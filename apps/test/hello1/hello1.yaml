@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello1-test
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.softonic.io'
+    chart: softonic/hello-world-app
+    targetRevision: '1.2.2'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: app1-test
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
